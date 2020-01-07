@@ -20,6 +20,7 @@ import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import MenuIcon from '@material-ui/icons/Menu'
 import { useCookies } from 'react-cookie'
+import MenuDrawer from './Drawer';
 
 const getStyle = makeStyles(theme => ({
     root: {
@@ -30,6 +31,10 @@ const getStyle = makeStyles(theme => ({
     },
     title: {
         flexGrow: 1
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+        position: "relative"
     }
 }));
 
@@ -51,11 +56,9 @@ const Navbar = (props) => {
     const changeTheme = useChangeTheme(props, setCookie);
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <MenuDrawer />
+            <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuBtn} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         {title}
                     </Typography>

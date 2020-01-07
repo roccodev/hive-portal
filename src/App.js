@@ -20,7 +20,7 @@ import Navbar from './components/nav/Navbar.js';
 import { createMuiTheme, Container, CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Bedwars from './routes/Bedwars';
 import { useCookies } from 'react-cookie';
 
@@ -47,7 +47,41 @@ function App() {
         <Navbar themeSetter={setTheme} />
         <Container maxWidth="lg">
           <BrowserRouter basename={"hive-portal"}>
-            <Route path={"/bedwars*"} component={Bedwars} />
+            <Route exact path={"/bedwars*"} component={Bedwars} />
+
+            {/* Old redirects */}
+            <Route path="/monthlies/timv/">
+              <Redirect to="/timv/monthlies/" />
+            </Route>
+            <Route path="/monthlies/dr/">
+              <Redirect to="/deathrun/monthlies/" />
+            </Route>
+            <Route path="/monthlies/sky/">
+              <Redirect to="/skywars/monthlies/" />
+            </Route>
+            <Route path="/monthlies/cai/">
+              <Redirect to="/cai/monthlies/" />
+            </Route>
+            <Route path="/monthlies/bp/">
+              <Redirect to="/bp/monthlies/" />
+            </Route>
+            <Route path="/monthlies/hide/">
+              <Redirect to="/hide/monthlies/" />
+            </Route>
+            <Route path="/monthlies/gnt/">
+              <Redirect to="/gnt/monthlies/" />
+            </Route>
+            <Route path="/monthlies/gntm/">
+              <Redirect to="/gntm/monthlies/" />
+            </Route>
+
+            {/* Aliases */}
+            <Route exact path="/dr*">
+              <Redirect to="/deathrun" />
+            </Route>
+            <Route exact path="/sky*">
+              <Redirect to="/skywars" />
+            </Route>
           </BrowserRouter>
         </Container>
       </div>
