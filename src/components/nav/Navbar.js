@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React from 'react';
+import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, IconButton, makeStyles } from '@material-ui/core';
 import { useTheme } from '@material-ui/core';
 import Brightness4Icon from '@material-ui/icons/Brightness4'
@@ -27,7 +27,10 @@ const getStyle = makeStyles(theme => ({
         flexGrow: 1
     },
     menuBtn: {
-        marginRight: theme.spacing(2)
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up('sm')]: {
+            display: 'none',
+        },
     },
     title: {
         flexGrow: 1
@@ -54,11 +57,25 @@ const Navbar = (props) => {
     const classes = getStyle();
     const title = "Hive Portal";
     const changeTheme = useChangeTheme(props, setCookie);
+    const [mobile, setMobile] = useState(false);
+
+    const toggle = () => {
+        setMobile(!mobile);
+    }
     return (
         <div className={classes.root}>
-            <MenuDrawer />
+            <MenuDrawer mobile={mobile} setMobile={setMobile} />
             <AppBar className={classes.appBar}>
                 <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={toggle}
+                        className={classes.menuBtn}
+                    >
+                        <MenuIcon />
+                    </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         {title}
                     </Typography>

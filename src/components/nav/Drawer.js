@@ -22,9 +22,11 @@ import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { AppBar, Toolbar, IconButton } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Modes from './../../Modes';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const width = 240;
 
@@ -39,17 +41,16 @@ const useStyles = makeStyles(theme => ({
         },
     },
     appBar: {
-        [theme.breakpoints.up('sm')]: {
-            width: `calc(100% - ${width}px)`,
-            marginLeft: width,
-        },
-        zIndex: theme.zIndex.drawer + 1,
+        visibility: "hidden",
     },
     menuButton: {
         marginRight: theme.spacing(2),
         [theme.breakpoints.up('sm')]: {
             display: 'none',
         },
+        visibility: "visible",
+        zIndex: theme.zIndex.drawer + 2,
+        position: "relative"
     },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
@@ -68,8 +69,7 @@ function MenuDrawer(props) {
     const container = props.container;
     const classes = useStyles();
     const theme = useTheme();
-    const [mobile, setMobile] = useState(false);
-
+    const { mobile, setMobile } = props;
     const toggle = () => {
         setMobile(!mobile);
     }
