@@ -14,7 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const modes = {
-    "Bedwars": [
+    "BedWars": [
         {
             name: "Monthlies",
             url: "/bedwars/monthlies"
@@ -26,6 +26,66 @@ const modes = {
         {
             name: "Stats",
             url: "/bedwars/stats"
+        },
+        {
+            name: "Farmers",
+            url: "/bedwars/farmers"
+        },
+        {
+            name: "Ranks",
+            url: "/bedwars/ranks"
+        },
+        {
+            name: "Maps",
+            url: "/bedwars/maps"
+        }
+    ],
+    "Trouble in Mineville": [
+        {
+            name: "Monthlies",
+            url: "/timv/monthlies"
+        }
+    ],
+    "SkyWars": [
+        {
+            name: "Monthlies",
+            url: "/skywars/monthlies"
+        }
+    ],
+    "DeathRun": [
+        {
+            name: "Monthlies",
+            url: "/deathrun/monthlies"
+        }
+    ],
+    "Cowboys and Indians": [
+        {
+            name: "Monthlies",
+            url: "/cai/monthlies"
+        }
+    ],
+    "Hide and Seek": [
+        {
+            name: "Monthlies",
+            url: "/hide/monthlies"
+        }
+    ],
+    "BlockParty": [
+        {
+            name: "Monthlies",
+            url: "/bp/monthlies"
+        }
+    ],
+    "SkyGiants": [
+        {
+            name: "Monthlies",
+            url: "/gnt/monthlies"
+        }
+    ],
+    "SkyGiants: Mini": [
+        {
+            name: "Monthlies",
+            url: "/gntm/monthlies"
         }
     ]
 }

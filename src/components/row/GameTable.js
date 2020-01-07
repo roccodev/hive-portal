@@ -115,7 +115,9 @@ class FirebaseTable extends React.Component {
                             pageSizeOptions: [10, 20, 50],
                             rowStyle: rowData => ({
                                 backgroundColor: (rowData.tableData.id % 2) ? theme.palette.background.paper : theme.palette.background.default
-                            })
+                            }),
+                            exportButton: true,
+                            draggable: false
                         }}
                         data={(query) => this.parser(query, this.json)}
                     >
