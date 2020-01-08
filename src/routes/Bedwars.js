@@ -17,6 +17,8 @@ import React from 'react';
 import { Typography, useTheme, withTheme } from '@material-ui/core';
 import { makeTable } from '../components/row/GameTable';
 import config from '../firebase/config';
+import Modes from '../Modes';
+import { ModeState } from '../Modes';
 
 const columns = [
     { title: "Place", field: "_____place", defaultSort: "asc" },
@@ -33,8 +35,9 @@ const columns = [
 ];
 
 class Bedwars extends React.Component {
-    constructor(props) {
-        super(props)
+
+    componentDidMount() {
+        ModeState.index = Object.keys(Modes).indexOf("BedWars");
         this.setState({ title: "Bedwars" });
     }
 

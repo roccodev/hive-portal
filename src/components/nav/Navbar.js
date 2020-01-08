@@ -21,6 +21,9 @@ import Brightness7Icon from '@material-ui/icons/Brightness7'
 import MenuIcon from '@material-ui/icons/Menu'
 import { useCookies } from 'react-cookie'
 import MenuDrawer from './Drawer';
+import NavbarItem from './NavbarItem';
+import Modes from '../../Modes';
+import { ModeState } from '../../Modes';
 
 const getStyle = makeStyles(theme => ({
     root: {
@@ -50,14 +53,32 @@ function useChangeTheme(props, cookie) {
     });
 }
 
+function getCurrentModeName() {
+    if (ModeState.index === -1) {
+        return "Hive Portal";
+    }
+    else {
+        return `Hive Portal - ${Object.keys(Modes)[ModeState.index]}`;
+    }
+}
+
+function getCurrentModeItems() {
+    if (ModeState.index !== -1) {
+        return Modes[Object.keys(Modes)[ModeState.index]].map(item => {
+            return (<NavbarItem href={item.url}>{item.name}</NavbarItem>);
+        });
+    }
+}
+
 const Navbar = (props) => {
     const theme = useTheme().palette.type;
     const [_, setCookie, _r] = useCookies(['palette-type']);
     const themeButton = theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />;
     const classes = getStyle();
-    const title = "Hive Portal";
+    const title = getCurrentModeName();
     const changeTheme = useChangeTheme(props, setCookie);
     const [mobile, setMobile] = useState(false);
+    const navItems = getCurrentModeItems();
 
     const toggle = () => {
         setMobile(!mobile);
@@ -76,9 +97,11 @@ const Navbar = (props) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" className={classes.title}>
+                    <Typography variant="h6" style={{ flexGrow: 0.1 }}>
                         {title}
                     </Typography>
+                    {navItems}
+                    <Typography className={classes.title}></Typography>
                     <IconButton aria-label="palette" color="inherit" onClick={changeTheme}>
                         {themeButton}
                     </IconButton>

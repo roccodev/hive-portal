@@ -20,11 +20,12 @@ import Navbar from './components/nav/Navbar.js';
 import { createMuiTheme, Container, CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, withRouter } from 'react-router-dom';
 import Bedwars from './routes/Bedwars';
 import { useCookies } from 'react-cookie';
+import Router from './Router.js';
 
-function App() {
+function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
   const [theme, setTheme] = useState(cookieTheme['palette-type']);
 
@@ -44,11 +45,12 @@ function App() {
     <MuiThemeProvider theme={theme1}>
       <CssBaseline />
       <div className="App">
-        <Navbar themeSetter={setTheme} />
-        <Container maxWidth="lg">
-          <BrowserRouter basename={"hive-portal"}>
-            <Route exact path={"/bedwars*"} component={Bedwars} />
+        <BrowserRouter basename={"hive-portal"}>
+          <Router />
+          <Navbar themeSetter={setTheme} />
+          <Container maxWidth="lg">
 
+            <Route exact path="/bedwars*" component={Bedwars} />
             {/* Old redirects */}
             <Route path="/monthlies/timv/">
               <Redirect to="/timv/monthlies/" />
@@ -82,8 +84,8 @@ function App() {
             <Route exact path="/sky*">
               <Redirect to="/skywars" />
             </Route>
-          </BrowserRouter>
-        </Container>
+          </Container>
+        </BrowserRouter>
       </div>
     </MuiThemeProvider>
   );

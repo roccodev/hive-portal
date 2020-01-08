@@ -15,18 +15,16 @@
 
 // Credits: https://material-ui.com/components/drawers/
 
-import React, { useState } from 'react';
+import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { AppBar, Toolbar, IconButton } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Modes from './../../Modes';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const width = 240;
 
@@ -62,6 +60,16 @@ const useStyles = makeStyles(theme => ({
     },
     divider: {
         margin: `5px 0 0 ${theme.spacing(9)}px`,
+    },
+    contentVerbose: {
+        [theme.breakpoints.up('sm')]: {
+            display: 'none'
+        }
+    },
+    contentBrief: {
+        [theme.breakpoints.down('sm')]: {
+            display: 'none'
+        }
     }
 }));
 
@@ -76,32 +84,49 @@ function MenuDrawer(props) {
     const drawer = (
         <div>
             <div className={classes.toolbar} />
-            {Object.keys(Modes).map(name => {
-                let items = Modes[name].map(item => {
+            <div className={classes.contentVerbose}>
+                {Object.keys(Modes).map(name => {
+                    let items = Modes[name].map(item => {
+                        return (
+                            <ListItem button component="a" href={item.url}>
+                                <ListItemText primary={item.name} />
+                            </ListItem>
+                        );
+                    });
                     return (
-                        <ListItem button component="a" href={item.url}>
-                            <ListItemText primary={item.name} />
-                        </ListItem>
+                        <div>
+                            <Divider component="li">
+                                <li>
+                                    <Typography
+                                        className={classes.divider}
+                                        color="textSecondary"
+                                        display="block"
+                                        variant="caption"
+                                    >{name}</Typography>
+                                </li>
+                            </Divider>
+                            <List>
+                                {items}
+                            </List>
+                        </div>
                     );
-                });
-                return (
-                    <div>
-                        <Divider component="li">
-                            <li>
-                                <Typography
-                                    className={classes.divider}
-                                    color="textSecondary"
-                                    display="block"
-                                    variant="caption"
-                                >{name}</Typography>
-                            </li>
-                        </Divider>
-                        <List>
-                            {items}
-                        </List>
-                    </div>
-                );
-            })}
+                })}
+            </div>
+            <div className={classes.contentBrief}>
+                {Object.keys(Modes).map(name => {
+                    let item = Modes[name][0];
+                    return (
+                        <div>
+                            <Divider />
+                            <List>
+                                <ListItem button component="a" href={item.url}>
+                                    <ListItemText primary={name} />
+                                </ListItem>
+                            </List>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 
