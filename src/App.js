@@ -21,9 +21,10 @@ import { createMuiTheme, Container, CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import { BrowserRouter, Route, Redirect, withRouter } from 'react-router-dom';
-import Bedwars from './routes/Bedwars';
+import BedMonthlies from './routes/bedwars/BedMonthlies';
 import { useCookies } from 'react-cookie';
 import Router from './Router.js';
+import BedStats from './routes/bedwars/BedStats.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -46,44 +47,49 @@ function App(props) {
       <CssBaseline />
       <div className="App">
         <BrowserRouter basename={"hive-portal"}>
+          {/* Old redirects */}
+          <Route exact path="/bedwars">
+            <Redirect to="/bedwars/monthlies/" />
+          </Route>
+          <Route path="/monthlies/timv/">
+            <Redirect to="/timv/monthlies/" />
+          </Route>
+          <Route path="/monthlies/dr/">
+            <Redirect to="/deathrun/monthlies/" />
+          </Route>
+          <Route path="/monthlies/sky/">
+            <Redirect to="/skywars/monthlies/" />
+          </Route>
+          <Route path="/monthlies/cai/">
+            <Redirect to="/cai/monthlies/" />
+          </Route>
+          <Route path="/monthlies/bp/">
+            <Redirect to="/bp/monthlies/" />
+          </Route>
+          <Route path="/monthlies/hide/">
+            <Redirect to="/hide/monthlies/" />
+          </Route>
+          <Route path="/monthlies/gnt/">
+            <Redirect to="/gnt/monthlies/" />
+          </Route>
+          <Route path="/monthlies/gntm/">
+            <Redirect to="/gntm/monthlies/" />
+          </Route>
+
+          {/* Aliases */}
+          <Route exact path="/dr*">
+            <Redirect to="/deathrun" />
+          </Route>
+          <Route exact path="/sky*">
+            <Redirect to="/skywars" />
+          </Route>
+
           <Router />
           <Navbar themeSetter={setTheme} />
           <Container maxWidth="lg">
 
-            <Route exact path="/bedwars*" component={Bedwars} />
-            {/* Old redirects */}
-            <Route path="/monthlies/timv/">
-              <Redirect to="/timv/monthlies/" />
-            </Route>
-            <Route path="/monthlies/dr/">
-              <Redirect to="/deathrun/monthlies/" />
-            </Route>
-            <Route path="/monthlies/sky/">
-              <Redirect to="/skywars/monthlies/" />
-            </Route>
-            <Route path="/monthlies/cai/">
-              <Redirect to="/cai/monthlies/" />
-            </Route>
-            <Route path="/monthlies/bp/">
-              <Redirect to="/bp/monthlies/" />
-            </Route>
-            <Route path="/monthlies/hide/">
-              <Redirect to="/hide/monthlies/" />
-            </Route>
-            <Route path="/monthlies/gnt/">
-              <Redirect to="/gnt/monthlies/" />
-            </Route>
-            <Route path="/monthlies/gntm/">
-              <Redirect to="/gntm/monthlies/" />
-            </Route>
-
-            {/* Aliases */}
-            <Route exact path="/dr*">
-              <Redirect to="/deathrun" />
-            </Route>
-            <Route exact path="/sky*">
-              <Redirect to="/skywars" />
-            </Route>
+            <Route path="/bedwars/monthlies" component={BedMonthlies} />
+            <Route path="/bedwars/stats" component={BedStats} />
           </Container>
         </BrowserRouter>
       </div>

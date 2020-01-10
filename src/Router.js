@@ -14,8 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
-import Bedwars from './routes/Bedwars';
+import { withRouter } from 'react-router-dom';
 import Modes from './Modes';
 import { ModeState } from './Modes';
 
@@ -33,10 +32,13 @@ function getComponentForMode(mode) {
 class Router extends React.Component {
     render() {
         const path = this.props.location.pathname;
-        let match = /[^\/][^\/]*/.exec(path);
-        if (match.length > 0) {
+        let match = path.match(/[^\/][^\/]*/g);
+        if (match && match.length > 0) {
             const mode = match[0].toLowerCase();
             getComponentForMode(mode);
+            if (match[2]) {
+                ModeState.thirdParam = match[2];
+            }
         }
         return (<div></div>);
     }

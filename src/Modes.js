@@ -89,8 +89,10 @@ const modes = {
         }
     ]
 }
+
 let ModeState = {
-    index: -1
+    index: -1,
+    thirdParam: "",
 }
 export default modes;
 export { ModeState };

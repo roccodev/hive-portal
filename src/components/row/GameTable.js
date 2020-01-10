@@ -128,6 +128,40 @@ class FirebaseTable extends React.Component {
     }
 }
 
+function makeTableParser(query, fields, json) {
+    return new Promise((res, rej) => {
+        if (Object.keys(json).length === 0) return;
+        let data = Object.values(json).map(obj => {
+            obj.kd = (obj[fields.kills] / obj[fields.deaths]).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            obj.wl = (obj[fields.victories] / (obj[fields.played] - obj[fields.victories])).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            return obj;
+        })
+        const pageSize = query.pageSize;
+        const page = query.page;
+        const orderBy = query.orderBy;
+        const filter = query.search;
+        if (filter) {
+            data = data.filter(obj => obj[fields.name].match(new RegExp(filter, 'i')));
+        }
+        const length = data.length;
+        if (orderBy) {
+            data = data.sort((a, b) => {
+                const obj1 = a[orderBy.field];
+                const obj2 = b[orderBy.field];
+
+                const cmp = obj1 > obj2 ? 1 : obj1 < obj2 ? -1 : 0;
+                return query.orderDirection === "asc" ? cmp : -cmp;
+            })
+        }
+        data = data.slice(page * pageSize, page * pageSize + pageSize);
+        res({
+            data: data,
+            page: query.page,
+            totalCount: length
+        })
+    });
+}
+
 function makeTable(columns, title, parser, fbConfig, theme) {
     return (
         <div>
@@ -142,4 +176,4 @@ function makeTable(columns, title, parser, fbConfig, theme) {
     );
 }
 
-export { makeTable };
+export { makeTable, makeTableParser };
