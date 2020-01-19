@@ -16,12 +16,13 @@
 import React from 'react';
 import { ModeState } from '../../Modes';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Typography, Button } from '@material-ui/core';
+import { Card, CardContent, Typography, Button, CardActions, Modal, Chip } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import { getJson } from '../../util/HttpClient';
 import { withStyles } from '@material-ui/styles';
+import html2canvas from 'html2canvas';
 
-const useStyles = ({
+const useStyles = theme => ({
     card: {
         maxWidth: 500,
         maxHeight: 500,
@@ -43,6 +44,14 @@ const useStyles = ({
     },
     pos: {
         marginBottom: 12,
+    },
+    modal: {
+        position: 'absolute',
+        width: 600,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
     },
 });
 
@@ -93,6 +102,49 @@ function getStatistics(data, stats, classes) {
         }</div>);
 }
 
+class ImageModal extends React.Component {
+    constructor(props) {
+        super(props);
+        this.close = this.close.bind(this);
+    }
+
+    getModalStyle() {
+        const top = 50;
+        const left = 50;
+
+        return {
+            top: `${top}%`,
+            left: `${left}%`,
+            transform: `translate(-${top}%, -${left}%)`,
+        };
+    }
+
+    state = {
+        open: false
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({ ...props });
+    }
+
+    close() {
+        this.setState({ open: false })
+    }
+
+    render() {
+        return (
+            <Modal
+                aria-labelledby="img-title"
+                open={this.state.open}
+                onClose={this.close}>
+                <div style={this.getModalStyle()} className={this.state.classes}>
+                    <h2 id="img-title">{this.state.name}'s Stats</h2>
+                    {this.state.img}
+                </div>
+            </Modal>
+        );
+    }
+}
 
 class BedStats extends React.Component {
     state = {
@@ -111,7 +163,10 @@ class BedStats extends React.Component {
         this._dataPromise = getJson(`https://api.hivemc.com/v1/player/${this.uuid}/${urlMode}`).then(
             json => {
                 this._dataPromise = null;
-                this.setState({ mode: this.state.mode, data: json });
+                if (urlMode === "BED") {
+                    this.state.title = json.title;
+                }
+                this.setState({ ...this.state, data: json });
             }
         );
     }
@@ -126,26 +181,45 @@ class BedStats extends React.Component {
         const classes = this.props.classes;
         const mode = this.state.mode;
         const data = this.state.data;
-        return (<Card className={classes.card}>
-            <CardContent>
-                <div style={{ display: 'flex' }}>
-                    <Typography style={{ flexGrow: 1 }}>
-                        {this.uuid}'s Stats
-                </Typography>
-                    <ToggleButtonGroup size="small" color="primary" value={mode} exclusive onChange={(e, i) => {
-                        this.state.mode = i;
-                        this.updateData();
-                    }}>
-                        <ToggleButton value={0}>Global</ToggleButton>
-                        <ToggleButton value={1}>Solo</ToggleButton>
-                        <ToggleButton value={2}>Duos</ToggleButton>
-                        <ToggleButton value={3}>Teams</ToggleButton>
-                        <ToggleButton value={4}>LTM</ToggleButton>
-                    </ToggleButtonGroup>
+        return (
+            <div>
+                <div className={classes.card}>
+                    <Button onClick={(e, i) => {
+                        html2canvas(document.getElementById('statsCard')).then(img => {
+                            const i = <img src={img.toDataURL("image/png")} alt="Stats" style={{ border: "1px solid green" }} />;
+                            this.setState({ ...this.state, imgModal: i })
+                        });
+                    }}>Save as image</Button>
+                    <Card id="statsCard">
+                        <CardContent>
+                            <div style={{ display: 'flex' }}>
+                                <Typography style={{ flexGrow: 1 }}>
+                                    {this.uuid}'s Stats
+                                </Typography>
+                                <ToggleButtonGroup size="small" color="primary" value={mode} exclusive onChange={(e, i) => {
+                                    this.state.mode = i;
+                                    this.state.imgModal = null;
+                                    this.updateData();
+                                }}>
+                                    <ToggleButton value={0}>Global</ToggleButton>
+                                    <ToggleButton value={1}>Solo</ToggleButton>
+                                    <ToggleButton value={2}>Duos</ToggleButton>
+                                    <ToggleButton value={3}>Teams</ToggleButton>
+                                    <ToggleButton value={4}>LTM</ToggleButton>
+                                </ToggleButtonGroup>
+                            </div>
+                            {this.state.data ? getStatistics(data, stats, classes) : "Loading..."}
+                        </CardContent >
+                        <CardActions style={{ display: "flex" }}>
+                            <Chip label={this.state.title} />
+                            <div style={{ flexGrow: 1 }}></div>
+                            <Typography variant="caption">https://hive.rocco.dev/bedwars/stats/{this.uuid}</Typography>
+                        </CardActions>
+                    </Card >
                 </div>
-                {this.state.data ? getStatistics(data, stats, classes) : "Loading..."}
-            </CardContent >
-        </Card >);
+                <ImageModal open={!!this.state.imgModal} img={this.state.imgModal} classes={classes.modal} name={this.uuid} />
+            </div>
+        );
     }
 }
 

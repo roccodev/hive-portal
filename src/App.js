@@ -46,7 +46,7 @@ function App(props) {
     <MuiThemeProvider theme={theme1}>
       <CssBaseline />
       <div className="App">
-        <BrowserRouter basename={"hive-portal"}>
+        <BrowserRouter>
           {/* Old redirects */}
           <Route exact path="/bedwars">
             <Redirect to="/bedwars/monthlies/" />
