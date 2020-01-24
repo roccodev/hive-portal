@@ -16,42 +16,36 @@
 import React from 'react';
 import { withTheme } from '@material-ui/core';
 import { makeTable, makeTableParser } from '../../components/row/GameTable';
-import config from '../../firebase/config';
+import { Monthlies } from '../../firebase/config';
 
 const columns = [
-    { title: "Place", field: "_____place", defaultSort: "asc" },
-    { title: "Name", field: "____name", searchable: true },
-    { title: "Points", field: "__points" },
-    { title: "Kills", field: "_kills" },
-    { title: "Deaths", field: "_kjdeaths" },
-    { title: "Victories", field: "_victories" },
-    { title: "Played", field: "played" },
-    { title: "Beds Destroyed", field: "zBeds" },
-    { title: "Teams Eliminated", field: "zTeams" },
+    { title: "Place", field: "place", defaultSort: "asc" },
+    { title: "Name", field: "username", searchable: true },
+    { title: "Points", field: "points" },
+    { title: "Kills", field: "kills" },
+    { title: "Deaths", field: "deaths" },
+    { title: "Victories", field: "victories" },
+    { title: "Games Played", field: "played" },
     { title: "K/D", field: "kd" },
     { title: "W/L", field: "wl" }
 ];
 
-class Bedwars extends React.Component {
-
-    componentDidMount() {
-        this.setState({ title: "Bedwars" });
-    }
+class DeathrunMonthlies extends React.Component {
 
     render() {
         const fields = {
-            name: "____name",
-            kills: "_kills",
-            deaths: "_kjdeaths",
-            victories: "_victories",
-            played: "played"
+            name: "username",
+            kills: "kills",
+            victories: "victories",
+            played: "played",
+            deaths: "deaths"
         }
         return (
             <div>
-                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), config, this.props.theme)}
+                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), Monthlies.dr, this.props.theme, "/monthly")}
             </div>
         );
     }
 }
 
-export default withTheme(Bedwars);
+export default withTheme(DeathrunMonthlies);

@@ -25,6 +25,13 @@ import BedMonthlies from './routes/bedwars/BedMonthlies';
 import { useCookies } from 'react-cookie';
 import Router from './Router.js';
 import BedStats from './routes/bedwars/BedStats.js';
+import TimvMonthlies from './routes/monthlies/TimvMonthlies.js';
+import DrMonthlies from './routes/monthlies/DrMonthlies.js';
+import HideMonthlies from './routes/monthlies/HideMonthlies.js';
+import GntMonthlies from './routes/monthlies/GntMonthlies.js';
+import SkyMonthlies from './routes/monthlies/SkyMonthlies.js';
+import CaiMonthlies from './routes/monthlies/CaiMonthlies.js';
+import BpMonthlies from './routes/monthlies/BpMonthlies.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -80,16 +87,28 @@ function App(props) {
           <Route exact path="/dr*">
             <Redirect to="/deathrun" />
           </Route>
-          <Route exact path="/sky*">
+          <Route exact path="/sky/*">
             <Redirect to="/skywars" />
           </Route>
 
           <Router />
           <Navbar themeSetter={setTheme} />
           <Container maxWidth="lg">
-
             <Route path="/bedwars/monthlies" component={BedMonthlies} />
             <Route path="/bedwars/stats" component={BedStats} />
+
+            <Route path="/timv/monthlies" component={TimvMonthlies} />
+
+            <Route path="/deathrun/monthlies" component={DrMonthlies} />
+
+            <Route path="/gnt/monthlies" render={() => <GntMonthlies />} />
+            <Route path="/gntm/monthlies" render={() => <GntMonthlies mini />} />
+
+            <Route path="/skywars/monthlies" component={SkyMonthlies} />
+
+            <Route path="/cai/monthlies" component={CaiMonthlies} />
+
+            <Route path="/bp/monthlies" component={BpMonthlies} />
           </Container>
         </BrowserRouter>
       </div>

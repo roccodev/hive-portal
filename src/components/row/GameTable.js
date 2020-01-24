@@ -67,8 +67,9 @@ class FirebaseTable extends React.Component {
         this.json = {};
         this.firebaseApp = Firebase.initializeApp(this.firebaseConfig);
         this.theme = props.theme;
+        this.path = props.path || "/";
         this.lastUpdate = new Date();
-        this.dbRef = this.firebaseApp.database().ref('/');
+        this.dbRef = this.firebaseApp.database().ref(this.path);
     }
 
     componentDidMount() {
@@ -95,7 +96,7 @@ class FirebaseTable extends React.Component {
         const theme = this.theme;
         return (
             <div>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", marginTop: "10px" }}>
                     <p style={{ flex: "1 1 5%", textDecoration: "italic" }}>Select a player to view more info.</p>
                     <Chip
                         label={`Last updated ${this.lastUpdate.getHours()}:${this.lastUpdate.getMinutes().toString().padStart(2, '0')}`}
@@ -103,26 +104,24 @@ class FirebaseTable extends React.Component {
                         style={{}}
                         icon={<Update />} />
                 </div>
-                <div style={{ display: "inline-flex" }}>
-                    <MaterialTable
-                        title={this.name}
-                        tableRef={this.tableRef}
-                        icons={tableIcons}
-                        columns={this.columns}
-                        options={{
-                            sorting: true,
-                            pageSize: 10,
-                            pageSizeOptions: [10, 20, 50],
-                            rowStyle: rowData => ({
-                                backgroundColor: (rowData.tableData.id % 2) ? theme.palette.background.paper : theme.palette.background.default
-                            }),
-                            exportButton: true,
-                            draggable: false
-                        }}
-                        data={(query) => this.parser(query, this.json)}
-                    >
-                    </MaterialTable >
-                </div>
+                <MaterialTable
+                    title={this.name}
+                    tableRef={this.tableRef}
+                    icons={tableIcons}
+                    columns={this.columns}
+                    options={{
+                        sorting: true,
+                        pageSize: 10,
+                        pageSizeOptions: [10, 20, 50],
+                        rowStyle: rowData => ({
+                            backgroundColor: (rowData.tableData.id % 2) ? theme.palette.background.paper : theme.palette.background.default
+                        }),
+                        exportButton: true,
+                        draggable: false
+                    }}
+                    data={(query) => this.parser(query, this.json)}
+                >
+                </MaterialTable >
             </div>
         );
     }
@@ -162,7 +161,7 @@ function makeTableParser(query, fields, json) {
     });
 }
 
-function makeTable(columns, title, parser, fbConfig, theme) {
+function makeTable(columns, title, parser, fbConfig, theme, path = "/") {
     return (
         <div>
             <FirebaseTable
@@ -171,6 +170,7 @@ function makeTable(columns, title, parser, fbConfig, theme) {
                 parser={parser}
                 config={fbConfig}
                 theme={theme}
+                path={path}
             />
         </div>
     );

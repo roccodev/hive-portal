@@ -24,6 +24,30 @@ function getComponentForMode(mode) {
         case "bedwars":
             ModeState.index = modes.indexOf("BedWars");
             break;
+        case "timv":
+            ModeState.index = modes.indexOf("Trouble in Mineville");
+            break;
+        case "deathrun":
+            ModeState.index = modes.indexOf("DeathRun");
+            break;
+        case "hide":
+            ModeState.index = modes.indexOf("Hide and Seek");
+            break;
+        case "gnt":
+            ModeState.index = modes.indexOf("SkyGiants");
+            break;
+        case "gntm":
+            ModeState.index = modes.indexOf("SkyGiants: Mini");
+            break;
+        case "skywars":
+            ModeState.index = modes.indexOf("SkyWars");
+            break;
+        case "cai":
+            ModeState.index = modes.indexOf("Cowboys and Indians");
+            break;
+        case "bp":
+            ModeState.index = modes.indexOf("BlockParty");
+            break;
         default:
             break;
     }

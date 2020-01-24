@@ -48,7 +48,10 @@ function useChangeTheme(props, cookie) {
     const setTheme = props.themeSetter;
     return () => setTheme(theme => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
-        cookie('palette-type', newTheme);
+        cookie('palette-type', newTheme, {
+            path: "/",
+            expires: new Date(2100, 1, 1)
+        });
         return newTheme;
     });
 }

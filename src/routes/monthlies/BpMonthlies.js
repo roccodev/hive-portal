@@ -16,42 +16,33 @@
 import React from 'react';
 import { withTheme } from '@material-ui/core';
 import { makeTable, makeTableParser } from '../../components/row/GameTable';
-import config from '../../firebase/config';
+import { Monthlies } from '../../firebase/config';
 
 const columns = [
-    { title: "Place", field: "_____place", defaultSort: "asc" },
-    { title: "Name", field: "____name", searchable: true },
-    { title: "Points", field: "__points" },
-    { title: "Kills", field: "_kills" },
-    { title: "Deaths", field: "_kjdeaths" },
-    { title: "Victories", field: "_victories" },
-    { title: "Played", field: "played" },
-    { title: "Beds Destroyed", field: "zBeds" },
-    { title: "Teams Eliminated", field: "zTeams" },
-    { title: "K/D", field: "kd" },
+    { title: "Place", field: "place", defaultSort: "asc" },
+    { title: "Name", field: "username", searchable: true },
+    { title: "Points", field: "points" },
+    { title: "Victories", field: "victories" },
+    { title: "Top 3s", field: "placings" },
+    { title: "Eliminations", field: "eliminations" },
+    { title: "Games Played", field: "played" },
     { title: "W/L", field: "wl" }
 ];
 
-class Bedwars extends React.Component {
-
-    componentDidMount() {
-        this.setState({ title: "Bedwars" });
-    }
+class DeathrunMonthlies extends React.Component {
 
     render() {
         const fields = {
-            name: "____name",
-            kills: "_kills",
-            deaths: "_kjdeaths",
-            victories: "_victories",
+            name: "username",
+            victories: "victories",
             played: "played"
         }
         return (
             <div>
-                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), config, this.props.theme)}
+                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), Monthlies.bp, this.props.theme, "/monthly")}
             </div>
         );
     }
 }
 
-export default withTheme(Bedwars);
+export default withTheme(DeathrunMonthlies);
