@@ -14,12 +14,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const Bedwars = {
-    apiKey: "AIzaSyCXEeRr-jGgfifMwCk8NnZy1aKUftzCnuI",
-    authDomain: "bedwarstoolkit-monthlies-bed.firebaseapp.com",
-    databaseURL: "https://bedwarstoolkit-monthlies-bed.firebaseio.com",
-    projectId: "bedwarstoolkit-monthlies-bed",
-    storageBucket: "bedwarstoolkit-monthlies-bed.appspot.com",
-    messagingSenderId: "482159749766"
+    monthlies: {
+        apiKey: "AIzaSyCXEeRr-jGgfifMwCk8NnZy1aKUftzCnuI",
+        authDomain: "bedwarstoolkit-monthlies-bed.firebaseapp.com",
+        databaseURL: "https://bedwarstoolkit-monthlies-bed.firebaseio.com",
+        projectId: "bedwarstoolkit-monthlies-bed",
+        storageBucket: "bedwarstoolkit-monthlies-bed.appspot.com",
+        messagingSenderId: "482159749766"
+    },
+    winstreaks: {
+        apiKey: "AIzaSyCpKTg35p_CCOb7-zeaCh0xqa60604xRc0",
+        authDomain: "bedwarstoolkit-streaks-bed.firebaseapp.com",
+        databaseURL: "https://bedwarstoolkit-streaks-bed.firebaseio.com",
+        projectId: "bedwarstoolkit-streaks-bed",
+        storageBucket: "bedwarstoolkit-streaks-bed.appspot.com",
+        messagingSenderId: "819473890874"
+    },
 }
 
 const Monthlies = {

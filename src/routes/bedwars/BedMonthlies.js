@@ -48,7 +48,7 @@ class Bedwars extends React.Component {
         }
         return (
             <div>
-                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), config, this.props.theme)}
+                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), config.monthlies, this.props.theme)}
             </div>
         );
     }

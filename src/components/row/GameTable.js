@@ -88,6 +88,12 @@ class FirebaseTable extends React.Component {
         this.firebaseApp.delete();
     }
 
+    updateRef(newPath) {
+        this.dbRef.off("value");
+        this.dbRef = this.firebaseApp.database().ref(newPath);
+        this.componentDidMount();
+    }
+
     update() {
         this.tableRef.current && this.tableRef.current.onQueryChange();
     }
@@ -161,18 +167,17 @@ function makeTableParser(query, fields, json) {
     });
 }
 
-function makeTable(columns, title, parser, fbConfig, theme, path = "/") {
+function makeTable(columns, title, parser, fbConfig, theme, path = "/", ref) {
     return (
-        <div>
-            <FirebaseTable
-                columns={columns}
-                name={title}
-                parser={parser}
-                config={fbConfig}
-                theme={theme}
-                path={path}
-            />
-        </div>
+        <FirebaseTable
+            columns={columns}
+            name={title}
+            parser={parser}
+            config={fbConfig}
+            theme={theme}
+            path={path}
+            ref={ref}
+        />
     );
 }
 

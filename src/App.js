@@ -32,6 +32,7 @@ import GntMonthlies from './routes/monthlies/GntMonthlies.js';
 import SkyMonthlies from './routes/monthlies/SkyMonthlies.js';
 import CaiMonthlies from './routes/monthlies/CaiMonthlies.js';
 import BpMonthlies from './routes/monthlies/BpMonthlies.js';
+import BedWinstreaks from './routes/bedwars/BedWinstreaks.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -96,6 +97,7 @@ function App(props) {
           <Container maxWidth="lg">
             <Route path="/bedwars/monthlies" component={BedMonthlies} />
             <Route path="/bedwars/stats" component={BedStats} />
+            <Route path="/bedwars/winstreaks" component={BedWinstreaks} />
 
             <Route path="/timv/monthlies" component={TimvMonthlies} />
 
