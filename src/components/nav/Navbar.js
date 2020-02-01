@@ -14,7 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, IconButton, makeStyles, Link } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, makeStyles } from '@material-ui/core';
 import { useTheme } from '@material-ui/core';
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
@@ -111,7 +111,7 @@ const Navbar = (props) => {
                     <IconButton aria-label="palette" color="inherit" onClick={changeTheme}>
                         {themeButton}
                     </IconButton>
-                    <IconButton aria-label="about" color="inherit" component={Link} href="/about">
+                    <IconButton aria-label="about" color="inherit" component="a" href="/about">
                         <InfoIcon />
                     </IconButton>
                 </Toolbar>
