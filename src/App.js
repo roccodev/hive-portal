@@ -20,7 +20,7 @@ import Navbar from './components/nav/Navbar.js';
 import { createMuiTheme, Container, CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
-import { BrowserRouter, Route, Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import BedMonthlies from './routes/bedwars/BedMonthlies';
 import { useCookies } from 'react-cookie';
 import Router from './Router.js';
@@ -33,6 +33,7 @@ import SkyMonthlies from './routes/monthlies/SkyMonthlies.js';
 import CaiMonthlies from './routes/monthlies/CaiMonthlies.js';
 import BpMonthlies from './routes/monthlies/BpMonthlies.js';
 import BedWinstreaks from './routes/bedwars/BedWinstreaks.js';
+import BedMonthliesProfile from './routes/bedwars/BedMonthliesProfile.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -95,22 +96,28 @@ function App(props) {
           <Router />
           <Navbar themeSetter={setTheme} />
           <Container maxWidth="lg">
-            <Route path="/bedwars/monthlies" component={BedMonthlies} />
-            <Route path="/bedwars/stats" component={BedStats} />
-            <Route path="/bedwars/winstreaks" component={BedWinstreaks} />
+            <Switch>
+              <Route path="/bedwars/monthlies/:uuid" component={BedMonthliesProfile} />
+              <Route path="/bedwars/monthlies" component={BedMonthlies} />
 
-            <Route path="/timv/monthlies" component={TimvMonthlies} />
+              <Route path="/bedwars/stats" component={BedStats} />
+              <Route path="/bedwars/winstreaks" component={BedWinstreaks} />
 
-            <Route path="/deathrun/monthlies" component={DrMonthlies} />
+              <Route path="/timv/monthlies" component={TimvMonthlies} />
 
-            <Route path="/gnt/monthlies" render={() => <GntMonthlies />} />
-            <Route path="/gntm/monthlies" render={() => <GntMonthlies mini />} />
+              <Route path="/deathrun/monthlies" component={DrMonthlies} />
 
-            <Route path="/skywars/monthlies" component={SkyMonthlies} />
+              <Route path="/gnt/monthlies" render={() => <GntMonthlies />} />
+              <Route path="/gntm/monthlies" render={() => <GntMonthlies mini />} />
 
-            <Route path="/cai/monthlies" component={CaiMonthlies} />
+              <Route path="/skywars/monthlies" component={SkyMonthlies} />
 
-            <Route path="/bp/monthlies" component={BpMonthlies} />
+              <Route path="/cai/monthlies" component={CaiMonthlies} />
+
+              <Route path="/bp/monthlies" component={BpMonthlies} />
+
+              <Route path="/hide/monthlies" component={HideMonthlies} />
+            </Switch>
           </Container>
         </BrowserRouter>
       </div>

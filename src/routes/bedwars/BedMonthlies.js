@@ -20,7 +20,7 @@ import config from '../../firebase/config';
 
 const columns = [
     { title: "Place", field: "_____place", defaultSort: "asc" },
-    { title: "Name", field: "____name", searchable: true },
+    { title: "Name", field: "name", searchable: true },
     { title: "Points", field: "__points" },
     { title: "Kills", field: "_kills" },
     { title: "Deaths", field: "_kjdeaths" },
@@ -48,7 +48,8 @@ class Bedwars extends React.Component {
         }
         return (
             <div>
-                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), config.monthlies, this.props.theme)}
+                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json),
+                    config.monthlies, this.props.theme, "/", null, "bedwars/monthlies")}
             </div>
         );
     }

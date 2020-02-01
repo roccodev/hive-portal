@@ -25,7 +25,7 @@ const columns = [
     { title: "Win Streak", field: "winstreak" },
 ];
 
-class Bedwars extends React.Component {
+class BedStreaks extends React.Component {
     table = React.createRef();
     state = { selected: 0 };
 
@@ -52,4 +52,4 @@ class Bedwars extends React.Component {
     }
 }
 
-export default withTheme(Bedwars);
+export default withTheme(BedStreaks);

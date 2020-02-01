@@ -21,6 +21,9 @@ import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import { getJson } from '../../util/HttpClient';
 import { withStyles } from '@material-ui/styles';
 import html2canvas from 'html2canvas';
+import { getStatistics } from './BedStats';
+import Bedwars from '../../firebase/config';
+import Firebase from 'firebase';
 
 const useStyles = theme => ({
     card: {
@@ -56,50 +59,21 @@ const useStyles = theme => ({
 });
 
 const stats = {
-    total_points: "Points",
-    victories: "Victories",
-    games_played: "Games Played",
-    kills: "Kills",
-    deaths: "Deaths",
-    beds_destroyed: "Beds Destroyed",
-    teams_eliminated: "Teams Eliminated",
-    win_streak: "Win Streak",
+    __points: "Points",
+    _victories: "Victories",
+    played: "Games Played",
+    _kills: "Kills",
+    _kjdeaths: "Deaths",
+    zBeds: "Beds Destroyed",
+    zTeams: "Teams Eliminated",
     kd: {
         name: "K/D",
-        value: (data) => (data.kills / data.deaths).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        value: (data) => (data._kills / data._kjdeaths).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     },
     wl: {
         name: "W/L",
-        value: (data) => (data.victories / (data.games_played - data.victories)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        value: (data) => (data._victories / (data.played - data._victories)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     }
-}
-
-function getStatistics(data, stats, classes) {
-    return (<div className={classes.elements}>
-        {
-            Object.keys(stats).map(stat => {
-                let name, value;
-                let obj = stats[stat];
-                if (typeof obj === "string") {
-                    name = obj;
-                    value = data[stat];
-                }
-                else if (typeof obj === "object") {
-                    name = obj.name;
-                    value = (obj.value)(data);
-                }
-                return (
-                    <div className={classes.element}>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            {name}
-                        </Typography>
-                        <Typography variant="h5" component="h2">
-                            {value}
-                        </Typography>
-                    </div>
-                );
-            })
-        }</div>);
 }
 
 class ImageModal extends React.Component {
@@ -146,40 +120,36 @@ class ImageModal extends React.Component {
     }
 }
 
-class BedStats extends React.Component {
+class BedMonthlyProfile extends React.Component {
     state = {
-        mode: 0,
         data: null
     };
 
     componentDidMount() {
         this.uuid = ModeState.thirdParam;
+        this.firebase = Firebase.initializeApp(Bedwars.monthlies, "profile");
+        this.dbRef = this.firebase.database().ref(this.uuid);
         this.updateData();
     }
 
     updateData() {
-        const mode = this.state.mode;
-        const urlMode = (!mode || mode === 0) ? "BED" : mode === 1 ? "BEDS" : mode === 2 ? "BEDD" : mode === 3 ? "BEDT" : "BEDX";
-        this._dataPromise = getJson(`https://api.hivemc.com/v1/player/${this.uuid}/${urlMode}`).then(
-            json => {
-                this._dataPromise = null;
-                if (urlMode === "BED") {
-                    this.state.title = json.title;
-                }
-                this.setState({ ...this.state, data: json });
-            }
-        );
+        this._dataPromise = 1;
+        this.dbRef.on("value", (snap) => {
+            const json = snap.val();
+            this._dataPromise = null;
+            this.setState({ ...this.state, data: json });
+        });
     }
 
     componentWillUnmount() {
         if (this._dataPromise) {
             this._dataPromise.cancel();
         }
+        this.firebase.delete();
     }
 
     render() {
         const classes = this.props.classes;
-        const mode = this.state.mode;
         const data = this.state.data;
         return (
             <div>
@@ -194,26 +164,15 @@ class BedStats extends React.Component {
                         <CardContent>
                             <div style={{ display: 'flex' }}>
                                 <Typography style={{ flexGrow: 1 }}>
-                                    {this.uuid}'s Stats
+                                    {data && data["____name"]}'s Monthly Stats ({new Date().toLocaleDateString()})
                                 </Typography>
-                                <ToggleButtonGroup size="small" color="primary" value={mode} exclusive onChange={(e, i) => {
-                                    this.state.mode = i;
-                                    this.state.imgModal = null;
-                                    this.updateData();
-                                }}>
-                                    <ToggleButton value={0}>Global</ToggleButton>
-                                    <ToggleButton value={1}>Solo</ToggleButton>
-                                    <ToggleButton value={2}>Duos</ToggleButton>
-                                    <ToggleButton value={3}>Teams</ToggleButton>
-                                    <ToggleButton value={4}>LTM</ToggleButton>
-                                </ToggleButtonGroup>
                             </div>
                             {this.state.data ? getStatistics(data, stats, classes) : "Loading..."}
                         </CardContent >
                         <CardActions style={{ display: "flex" }}>
-                            <Chip label={this.state.title} />
+                            <Chip label={data && `Place: #${data._____place}`} />
                             <div style={{ flexGrow: 1 }}></div>
-                            <Typography variant="caption">https://hive.rocco.dev/bedwars/stats/{this.uuid}</Typography>
+                            <Typography variant="caption">https://hive.rocco.dev/bedwars/monthlies</Typography>
                         </CardActions>
                     </Card >
                 </div>
@@ -223,5 +182,4 @@ class BedStats extends React.Component {
     }
 }
 
-export default withStyles(useStyles)(BedStats);
-export { getStatistics };
+export default withStyles(useStyles)(BedMonthlyProfile);

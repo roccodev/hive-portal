@@ -34,7 +34,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Update from '@material-ui/icons/Update'
-import { Chip } from '@material-ui/core';
+import { Chip, Link } from '@material-ui/core';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -137,6 +137,9 @@ function makeTableParser(query, fields, json) {
     return new Promise((res, rej) => {
         if (Object.keys(json).length === 0) return;
         let data = Object.values(json).map(obj => {
+            obj.uuid = Object.keys(json).find(key => json[key] === obj);
+            obj = { name: obj[fields.name], ...obj };
+            delete obj[fields.name];
             obj.kd = (obj[fields.kills] / obj[fields.deaths]).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             obj.wl = (obj[fields.victories] / (obj[fields.played] - obj[fields.victories])).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             return obj;
@@ -167,7 +170,16 @@ function makeTableParser(query, fields, json) {
     });
 }
 
-function makeTable(columns, title, parser, fbConfig, theme, path = "/", ref) {
+function makeTable(columns, title, parser, fbConfig, theme, path = "/", ref, nameBaseUrl) {
+    if (nameBaseUrl) {
+        columns = columns.map(col => {
+            if (col.field === "name") {
+                console.log(theme);
+                col.render = rowData => <Link href={`https://hive.rocco.dev/${nameBaseUrl}/${rowData.uuid}`}>{rowData.name}</Link>;
+            }
+            return col;
+        });
+    }
     return (
         <FirebaseTable
             columns={columns}
