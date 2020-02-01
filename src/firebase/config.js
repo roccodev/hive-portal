@@ -30,6 +30,15 @@ const Bedwars = {
         storageBucket: "bedwarstoolkit-streaks-bed.appspot.com",
         messagingSenderId: "819473890874"
     },
+    farmers: {
+        apiKey: "AIzaSyCjrKlAq1oujWmuaTwf1cHHCN13BiRpJOg",
+        authDomain: "monthlies-bed-kf.firebaseapp.com",
+        databaseURL: "https://monthlies-bed-kf.firebaseio.com",
+        projectId: "monthlies-bed-kf",
+        storageBucket: "monthlies-bed-kf.appspot.com",
+        messagingSenderId: "975567154907",
+        appId: "1:975567154907:web:feb5eabc25de1befaae6fe"
+    }
 }
 
 const Monthlies = {

@@ -149,7 +149,7 @@ function makeTableParser(query, fields, json) {
         const orderBy = query.orderBy;
         const filter = query.search;
         if (filter) {
-            data = data.filter(obj => obj[fields.name].match(new RegExp(filter, 'i')));
+            data = data.filter(obj => obj.name.match(new RegExp(filter, 'i')));
         }
         const length = data.length;
         if (orderBy) {
