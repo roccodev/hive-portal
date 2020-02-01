@@ -70,7 +70,12 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('sm')]: {
             display: 'none'
         }
-    }
+    },
+    appContent: theme.mixins.gutters({
+        flex: "1 1 100%",
+        maxWidth: "100%",
+        margin: "0 auto",
+    })
 }));
 
 function MenuDrawer(props) {
@@ -163,7 +168,9 @@ function MenuDrawer(props) {
                     </Drawer>
                 </Hidden>
             </nav>
-
+            <main className={classes.appContent}>
+                {props.app}
+            </main>
         </div>
     );
 }

@@ -45,6 +45,7 @@ import BedFarmers from './routes/bedwars/BedFarmers.js';
 import BedRanks from './routes/bedwars/BedRanks.js';
 import BedMaps from './routes/bedwars/BedMaps.js';
 import BedStatsLandingPage from './routes/bedwars/BedStatsLandingPage.js';
+import Ads from './components/Ads.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -62,6 +63,49 @@ function App(props) {
       }
     }), [isDark]
   );
+
+  const app = (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <Container maxWidth="lg">
+        <Switch>
+          <Route path="/bedwars/monthlies/:uuid" component={BedMonthliesProfile} />
+          <Route path="/bedwars/monthlies" component={BedMonthlies} />
+
+          <Route path="/bedwars/stats/:uuid" component={BedStats} />
+          <Route path="/bedwars/stats" component={BedStatsLandingPage} />
+          <Route path="/bedwars/winstreaks" component={BedWinstreaks} />
+          <Route path="/bedwars/farmers" component={BedFarmers} />
+          <Route path="/bedwars/ranks" component={BedRanks} />
+          <Route path="/bedwars/maps" component={BedMaps} />
+
+          <Route path="/timv/monthlies/:uuid" component={TimvMonthliesProfile} />
+          <Route path="/timv/monthlies" component={TimvMonthlies} />
+
+          <Route path="/deathrun/monthlies/:uuid" component={DrMonthliesProfile} />
+          <Route path="/deathrun/monthlies" component={DrMonthlies} />
+
+          <Route path="/gnt/monthlies/:uuid" render={() => <GntMonthliesProfile />} />
+          <Route path="/gnt/monthlies" render={() => <GntMonthlies />} />
+          <Route path="/gntm/monthlies/:uuid" render={() => <GntMonthliesProfile mini />} />
+          <Route path="/gntm/monthlies" render={() => <GntMonthlies mini />} />
+
+          <Route path="/skywars/monthlies/:uuid" component={SkyMonthliesProfile} />
+          <Route path="/skywars/monthlies" component={SkyMonthlies} />
+
+          <Route path="/cai/monthlies/:uuid" component={CaiMonthliesProfile} />
+          <Route path="/cai/monthlies" component={CaiMonthlies} />
+
+          <Route path="/bp/monthlies/:uuid" component={BpMonthliesProfile} />
+          <Route path="/bp/monthlies" component={BpMonthlies} />
+
+          <Route path="/hide/monthlies/:uuid" component={HideMonthliesProfile} />
+          <Route path="/hide/monthlies" component={HideMonthlies} />
+        </Switch>
+      </Container>
+      <Ads />
+    </div>
+  );
+
   return (
     <MuiThemeProvider theme={theme1}>
       <CssBaseline />
@@ -105,43 +149,7 @@ function App(props) {
           </Route>
 
           <Router />
-          <Navbar themeSetter={setTheme} />
-          <Container maxWidth="lg">
-            <Switch>
-              <Route path="/bedwars/monthlies/:uuid" component={BedMonthliesProfile} />
-              <Route path="/bedwars/monthlies" component={BedMonthlies} />
-
-              <Route path="/bedwars/stats/:uuid" component={BedStats} />
-              <Route path="/bedwars/stats" component={BedStatsLandingPage} />
-              <Route path="/bedwars/winstreaks" component={BedWinstreaks} />
-              <Route path="/bedwars/farmers" component={BedFarmers} />
-              <Route path="/bedwars/ranks" component={BedRanks} />
-              <Route path="/bedwars/maps" component={BedMaps} />
-
-              <Route path="/timv/monthlies/:uuid" component={TimvMonthliesProfile} />
-              <Route path="/timv/monthlies" component={TimvMonthlies} />
-
-              <Route path="/deathrun/monthlies/:uuid" component={DrMonthliesProfile} />
-              <Route path="/deathrun/monthlies" component={DrMonthlies} />
-
-              <Route path="/gnt/monthlies/:uuid" render={() => <GntMonthliesProfile />} />
-              <Route path="/gnt/monthlies" render={() => <GntMonthlies />} />
-              <Route path="/gntm/monthlies/:uuid" render={() => <GntMonthliesProfile mini />} />
-              <Route path="/gntm/monthlies" render={() => <GntMonthlies mini />} />
-
-              <Route path="/skywars/monthlies/:uuid" component={SkyMonthliesProfile} />
-              <Route path="/skywars/monthlies" component={SkyMonthlies} />
-
-              <Route path="/cai/monthlies/:uuid" component={CaiMonthliesProfile} />
-              <Route path="/cai/monthlies" component={CaiMonthlies} />
-
-              <Route path="/bp/monthlies/:uuid" component={BpMonthliesProfile} />
-              <Route path="/bp/monthlies" component={BpMonthlies} />
-
-              <Route path="/hide/monthlies/:uuid" component={HideMonthliesProfile} />
-              <Route path="/hide/monthlies" component={HideMonthlies} />
-            </Switch>
-          </Container>
+          <Navbar themeSetter={setTheme} app={app} />
         </BrowserRouter>
       </div>
     </MuiThemeProvider>

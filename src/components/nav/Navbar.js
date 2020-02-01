@@ -91,7 +91,6 @@ const Navbar = (props) => {
     }
     return (
         <div className={classes.root}>
-            <MenuDrawer mobile={mobile} setMobile={setMobile} />
             <AppBar className={classes.appBar}>
                 <Toolbar>
                     <IconButton
@@ -113,6 +112,7 @@ const Navbar = (props) => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
+            <MenuDrawer mobile={mobile} setMobile={setMobile} app={props.app} />
         </div >
     );
 }

@@ -139,7 +139,8 @@ function makeTableParser(query, fields, json) {
         let data = Object.values(json).map(obj => {
             obj.uuid = Object.keys(json).find(key => json[key] === obj);
             obj = { name: obj[fields.name], ...obj };
-            delete obj[fields.name];
+            if (fields.name !== "name")
+                delete obj[fields.name];
             obj.kd = (obj[fields.kills] / obj[fields.deaths]).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             obj.wl = (obj[fields.victories] / (obj[fields.played] - obj[fields.victories])).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             return obj;
