@@ -46,6 +46,7 @@ import BedRanks from './routes/bedwars/BedRanks.js';
 import BedMaps from './routes/bedwars/BedMaps.js';
 import BedStatsLandingPage from './routes/bedwars/BedStatsLandingPage.js';
 import Ads from './components/Ads.js';
+import About from './routes/About.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -68,6 +69,8 @@ function App(props) {
     <div style={{ display: "flex", alignItems: "center" }}>
       <Container maxWidth="lg">
         <Switch>
+          <Route path="/about" component={About} />
+
           <Route path="/bedwars/monthlies/:uuid" component={BedMonthliesProfile} />
           <Route path="/bedwars/monthlies" component={BedMonthlies} />
 
