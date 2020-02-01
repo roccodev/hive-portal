@@ -46,14 +46,17 @@ const getStyle = makeStyles(theme => ({
 
 function useChangeTheme(props, cookie) {
     const setTheme = props.themeSetter;
-    return () => setTheme(theme => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        cookie('palette-type', newTheme, {
-            path: "/",
-            expires: new Date(2100, 1, 1)
+    return () => {
+        setTheme(theme => {
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+            cookie('palette-type', newTheme, {
+                path: "/",
+                expires: new Date(2100, 1, 1)
+            });
+            return newTheme;
         });
-        return newTheme;
-    });
+        window.location.reload()
+    };
 }
 
 function getCurrentModeName() {

@@ -44,6 +44,7 @@ import GntMonthliesProfile from './routes/monthlies/GntMonthliesProfile.js';
 import BedFarmers from './routes/bedwars/BedFarmers.js';
 import BedRanks from './routes/bedwars/BedRanks.js';
 import BedMaps from './routes/bedwars/BedMaps.js';
+import BedStatsLandingPage from './routes/bedwars/BedStatsLandingPage.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -110,7 +111,8 @@ function App(props) {
               <Route path="/bedwars/monthlies/:uuid" component={BedMonthliesProfile} />
               <Route path="/bedwars/monthlies" component={BedMonthlies} />
 
-              <Route path="/bedwars/stats" component={BedStats} />
+              <Route path="/bedwars/stats/:uuid" component={BedStats} />
+              <Route path="/bedwars/stats" component={BedStatsLandingPage} />
               <Route path="/bedwars/winstreaks" component={BedWinstreaks} />
               <Route path="/bedwars/farmers" component={BedFarmers} />
               <Route path="/bedwars/ranks" component={BedRanks} />
