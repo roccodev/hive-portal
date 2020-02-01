@@ -20,7 +20,7 @@ import { Monthlies } from '../../firebase/config';
 
 const columns = [
     { title: "Place", field: "place", defaultSort: "asc" },
-    { title: "Name", field: "username", searchable: true },
+    { title: "Name", field: "name", searchable: true },
     { title: "Points", field: "points" },
     { title: "Kills", field: "kills" },
     { title: "Deaths", field: "deaths" },
@@ -43,7 +43,7 @@ class DeathrunMonthlies extends React.Component {
         return (
             <div>
                 {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json),
-                    this.props.mini ? Monthlies.gntm : Monthlies.gnt, this.props.theme, "/monthly")}
+                    this.props.mini ? Monthlies.gntm : Monthlies.gnt, this.props.theme, "/monthly", null, `${this.props.mini ? "gntm" : "gnt"}/monthlies`)}
             </div>
         );
     }

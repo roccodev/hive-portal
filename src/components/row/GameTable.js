@@ -174,7 +174,6 @@ function makeTable(columns, title, parser, fbConfig, theme, path = "/", ref, nam
     if (nameBaseUrl) {
         columns = columns.map(col => {
             if (col.field === "name") {
-                console.log(theme);
                 col.render = rowData => <Link href={`https://hive.rocco.dev/${nameBaseUrl}/${rowData.uuid}`}>{rowData.name}</Link>;
             }
             return col;

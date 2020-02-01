@@ -14,29 +14,29 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from 'react';
-import Bedwars from '../../firebase/config';
+import { Monthlies } from '../../firebase/config';
 import GameProfile from '../../components/row/GameProfile';
 
 const stats = {
-    __points: "Points",
-    _victories: "Victories",
-    played: "Games Played",
-    _kills: "Kills",
-    _kjdeaths: "Deaths",
-    zBeds: "Beds Destroyed",
-    zTeams: "Teams Eliminated",
-    kd: {
-        name: "K/D",
-        value: (data) => (data._kills / data._kjdeaths).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    karma: "Karma",
+    i_points: "Innocent Points",
+    d_points: "Detective Points",
+    t_points: "Traitor Points",
+    r_points: {
+        name: "Role Points",
+        value: (data) => data.t_points + data.i_points + data.d_points
     },
-    wl: {
-        name: "W/L",
-        value: (data) => (data._victories / (data.played - data._victories)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    }
+    most_change: "Most Points",
+    tr: {
+        name: "Traitor %",
+        value: (data) => (data.t_points * 100.0 / (data.t_points + data.i_points + data.d_points))
+            .toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "%"
+    },
+
 }
 
-function BedMonthliesProfile() {
-    return (<GameProfile stats={stats} fbConfig={Bedwars.monthlies} name="bedwars" />);
+function TimvMonthliesProfile() {
+    return (<GameProfile stats={stats} fbConfig={Monthlies.timv} path="monthly/" name="timv" />);
 }
 
-export default BedMonthliesProfile;
+export default TimvMonthliesProfile;

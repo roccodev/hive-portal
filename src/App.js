@@ -34,6 +34,13 @@ import CaiMonthlies from './routes/monthlies/CaiMonthlies.js';
 import BpMonthlies from './routes/monthlies/BpMonthlies.js';
 import BedWinstreaks from './routes/bedwars/BedWinstreaks.js';
 import BedMonthliesProfile from './routes/bedwars/BedMonthliesProfile.js';
+import BpMonthliesProfile from './routes/monthlies/BpMonthliesProfile.js';
+import TimvMonthliesProfile from './routes/monthlies/TimvMonthliesProfile.js';
+import SkyMonthliesProfile from './routes/monthlies/SkyMonthliesProfile.js';
+import CaiMonthliesProfile from './routes/monthlies/CaiMonthliesProfile.js';
+import HideMonthliesProfile from './routes/monthlies/HideMonthliesProfile.js';
+import DrMonthliesProfile from './routes/monthlies/DrMonthliesProfile.js';
+import GntMonthliesProfile from './routes/monthlies/GntMonthliesProfile.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -103,19 +110,27 @@ function App(props) {
               <Route path="/bedwars/stats" component={BedStats} />
               <Route path="/bedwars/winstreaks" component={BedWinstreaks} />
 
+              <Route path="/timv/monthlies/:uuid" component={TimvMonthliesProfile} />
               <Route path="/timv/monthlies" component={TimvMonthlies} />
 
+              <Route path="/deathrun/monthlies/:uuid" component={DrMonthliesProfile} />
               <Route path="/deathrun/monthlies" component={DrMonthlies} />
 
+              <Route path="/gnt/monthlies/:uuid" render={() => <GntMonthliesProfile />} />
               <Route path="/gnt/monthlies" render={() => <GntMonthlies />} />
+              <Route path="/gntm/monthlies/:uuid" render={() => <GntMonthliesProfile mini />} />
               <Route path="/gntm/monthlies" render={() => <GntMonthlies mini />} />
 
+              <Route path="/skywars/monthlies/:uuid" component={SkyMonthliesProfile} />
               <Route path="/skywars/monthlies" component={SkyMonthlies} />
 
+              <Route path="/cai/monthlies/:uuid" component={CaiMonthliesProfile} />
               <Route path="/cai/monthlies" component={CaiMonthlies} />
 
+              <Route path="/bp/monthlies/:uuid" component={BpMonthliesProfile} />
               <Route path="/bp/monthlies" component={BpMonthlies} />
 
+              <Route path="/hide/monthlies/:uuid" component={HideMonthliesProfile} />
               <Route path="/hide/monthlies" component={HideMonthlies} />
             </Switch>
           </Container>

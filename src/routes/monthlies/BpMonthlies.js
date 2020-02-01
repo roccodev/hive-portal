@@ -20,7 +20,7 @@ import { Monthlies } from '../../firebase/config';
 
 const columns = [
     { title: "Place", field: "place", defaultSort: "asc" },
-    { title: "Name", field: "username", searchable: true },
+    { title: "Name", field: "name", searchable: true },
     { title: "Points", field: "points" },
     { title: "Victories", field: "victories" },
     { title: "Top 3s", field: "placings" },
@@ -29,7 +29,7 @@ const columns = [
     { title: "W/L", field: "wl" }
 ];
 
-class DeathrunMonthlies extends React.Component {
+class BpMonthlies extends React.Component {
 
     render() {
         const fields = {
@@ -39,10 +39,11 @@ class DeathrunMonthlies extends React.Component {
         }
         return (
             <div>
-                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), Monthlies.bp, this.props.theme, "/monthly")}
+                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json),
+                    Monthlies.bp, this.props.theme, "/monthly", null, "bp/monthlies")}
             </div>
         );
     }
 }
 
-export default withTheme(DeathrunMonthlies);
+export default withTheme(BpMonthlies);

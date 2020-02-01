@@ -14,29 +14,23 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from 'react';
-import Bedwars from '../../firebase/config';
+import { Monthlies } from '../../firebase/config';
 import GameProfile from '../../components/row/GameProfile';
 
 const stats = {
-    __points: "Points",
-    _victories: "Victories",
+    points: "Points",
+    victories: "Victories",
     played: "Games Played",
-    _kills: "Kills",
-    _kjdeaths: "Deaths",
-    zBeds: "Beds Destroyed",
-    zTeams: "Teams Eliminated",
-    kd: {
-        name: "K/D",
-        value: (data) => (data._kills / data._kjdeaths).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    },
+    placings: "Top 3s",
+    eliminations: "Eliminations",
     wl: {
         name: "W/L",
-        value: (data) => (data._victories / (data.played - data._victories)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        value: (data) => (data.victories / (data.played - data.victories)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     }
 }
 
-function BedMonthliesProfile() {
-    return (<GameProfile stats={stats} fbConfig={Bedwars.monthlies} name="bedwars" />);
+function BpMonthliesProfile() {
+    return (<GameProfile stats={stats} fbConfig={Monthlies.bp} path="monthly/" name="bp" />);
 }
 
-export default BedMonthliesProfile;
+export default BpMonthliesProfile;

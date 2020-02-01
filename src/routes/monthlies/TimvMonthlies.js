@@ -20,7 +20,7 @@ import { Monthlies } from '../../firebase/config';
 
 const columns = [
     { title: "Place", field: "place", defaultSort: "asc" },
-    { title: "Name", field: "username", searchable: true },
+    { title: "Name", field: "name", searchable: true },
     { title: "Karma", field: "karma" },
     { title: "Innocent Points", field: "i_points" },
     { title: "Detective Points", field: "d_points" },
@@ -36,7 +36,8 @@ class TimvMonthlies extends React.Component {
         }
         return (
             <div>
-                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json), Monthlies.timv, this.props.theme, "/monthly")}
+                {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json),
+                    Monthlies.timv, this.props.theme, "/monthly", null, "timv/monthlies")}
             </div>
         );
     }
