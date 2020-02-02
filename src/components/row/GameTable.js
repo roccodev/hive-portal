@@ -172,19 +172,21 @@ function makeTableParser(query, fields, json) {
 }
 
 function makeTable(columns, title, parser, fbConfig, theme, path = "/", ref, nameBaseUrl) {
-    if (nameBaseUrl) {
-        columns = columns.map(col => {
-            if (col.field === "name") {
-                col.render = rowData => (
-                    <div style={{ display: "flex" }}>
-                        <img src={`https://crafatar.com/avatars/${rowData.uuid}?size=16`} alt="Skin"></img>
-                        <Link href={`https://hive.rocco.dev/${nameBaseUrl}/${rowData.uuid}`} style={{ marginLeft: "10px" }}>{rowData.name}</Link>
-                    </div >
-                );
-            }
-            return col;
-        });
-    }
+    columns = columns.map(col => {
+        if (col.field === "name") {
+            col.render = rowData => (
+                <div style={{ display: "flex" }}>
+                    {(() => {
+                        if (rowData.uuid) {
+                            return (<img src={`https://crafatar.com/avatars/${rowData.uuid}?size=16`} alt="Skin" height="16" style={{ marginRight: "10px" }}></img>);
+                        }
+                    })()}
+                    {nameBaseUrl ? <Link href={`https://hive.rocco.dev/${nameBaseUrl}/${rowData.uuid}`}>{rowData.name}</Link> : rowData.name}
+                </div >
+            );
+        }
+        return col;
+    });
     return (
         <FirebaseTable
             columns={columns}
