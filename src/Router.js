@@ -42,8 +42,8 @@ function getComponentForMode(mode) {
         case "skywars":
             ModeState.index = modes.indexOf("SkyWars");
             break;
-        case "cai":
-            ModeState.index = modes.indexOf("Cowboys and Indians");
+        case "splegg":
+            ModeState.index = modes.indexOf("Splegg");
             break;
         case "bp":
             ModeState.index = modes.indexOf("BlockParty");

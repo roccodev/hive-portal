@@ -21,16 +21,17 @@ const stats = {
     points: "Points",
     victories: "Victories",
     played: "Games Played",
-    captures: "Captures",
-    caught: "Caught",
+    eggs: "Eggs Thrown",
+    blocks: "Blocks Destroyed",
+    deaths: "Deaths",
     wl: {
         name: "W/L",
         value: (data) => (data.victories / (data.played - data.victories)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     }
 }
 
-function CaiMonthliesProfile() {
-    return (<GameProfile stats={stats} fbConfig={Monthlies.cai} path="monthly/" name="cai" />);
+function SpMonthliesProfile() {
+    return (<GameProfile stats={stats} fbConfig={Monthlies.sp} path="monthly/" name="splegg" />);
 }
 
-export default CaiMonthliesProfile;
+export default SpMonthliesProfile;

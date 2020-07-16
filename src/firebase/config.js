@@ -66,7 +66,7 @@ const Monthlies = {
         storageBucket: "monthlies-bp.appspot.com",
         messagingSenderId: "309473154865"
     },
-    cai: {
+    sp: {
         apiKey: "AIzaSyBRB4ANdfB8aOrWjhzcL8TaRnnEqTa5nGE",
         authDomain: "monthlies-cai.firebaseapp.com",
         databaseURL: "https://monthlies-cai.firebaseio.com",

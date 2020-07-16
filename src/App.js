@@ -30,14 +30,14 @@ import DrMonthlies from './routes/monthlies/DrMonthlies.js';
 import HideMonthlies from './routes/monthlies/HideMonthlies.js';
 import GntMonthlies from './routes/monthlies/GntMonthlies.js';
 import SkyMonthlies from './routes/monthlies/SkyMonthlies.js';
-import CaiMonthlies from './routes/monthlies/CaiMonthlies.js';
+import SpMonthlies from './routes/monthlies/SpMonthlies.js';
 import BpMonthlies from './routes/monthlies/BpMonthlies.js';
 import BedWinstreaks from './routes/bedwars/BedWinstreaks.js';
 import BedMonthliesProfile from './routes/bedwars/BedMonthliesProfile.js';
 import BpMonthliesProfile from './routes/monthlies/BpMonthliesProfile.js';
 import TimvMonthliesProfile from './routes/monthlies/TimvMonthliesProfile.js';
 import SkyMonthliesProfile from './routes/monthlies/SkyMonthliesProfile.js';
-import CaiMonthliesProfile from './routes/monthlies/CaiMonthliesProfile.js';
+import SpMonthliesProfile from './routes/monthlies/SpMonthliesProfile.js';
 import HideMonthliesProfile from './routes/monthlies/HideMonthliesProfile.js';
 import DrMonthliesProfile from './routes/monthlies/DrMonthliesProfile.js';
 import GntMonthliesProfile from './routes/monthlies/GntMonthliesProfile.js';
@@ -95,8 +95,8 @@ function App(props) {
           <Route path="/skywars/monthlies/:uuid" component={SkyMonthliesProfile} />
           <Route path="/skywars/monthlies" component={SkyMonthlies} />
 
-          <Route path="/cai/monthlies/:uuid" component={CaiMonthliesProfile} />
-          <Route path="/cai/monthlies" component={CaiMonthlies} />
+          <Route path="/splegg/monthlies/:uuid" component={SpMonthliesProfile} />
+          <Route path="/splegg/monthlies" component={SpMonthlies} />
 
           <Route path="/bp/monthlies/:uuid" component={BpMonthliesProfile} />
           <Route path="/bp/monthlies" component={BpMonthlies} />
@@ -127,8 +127,8 @@ function App(props) {
           <Route path="/monthlies/sky/">
             <Redirect to="/skywars/monthlies/" />
           </Route>
-          <Route path="/monthlies/cai/">
-            <Redirect to="/cai/monthlies/" />
+          <Route path="/monthlies/splegg/">
+            <Redirect to="/splegg/monthlies/" />
           </Route>
           <Route path="/monthlies/bp/">
             <Redirect to="/bp/monthlies/" />

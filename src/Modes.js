@@ -58,10 +58,10 @@ const modes = {
             url: "/deathrun/monthlies"
         }
     ],
-    "Cowboys and Indians": [
+    "Splegg": [
         {
             name: "Monthlies",
-            url: "/cai/monthlies"
+            url: "/splegg/monthlies"
         }
     ],
     "Hide and Seek": [
