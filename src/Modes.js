@@ -76,16 +76,16 @@ const modes = {
             url: "/bp/monthlies"
         }
     ],
-    "SkyGiants": [
+    "Gravity": [
         {
             name: "Monthlies",
-            url: "/gnt/monthlies"
+            url: "/gravity/monthlies"
         }
     ],
-    "SkyGiants: Mini": [
+    "DrawIt": [
         {
             name: "Monthlies",
-            url: "/gntm/monthlies"
+            url: "/drawit/monthlies"
         }
     ]
 }

@@ -28,7 +28,7 @@ import BedStats from './routes/bedwars/BedStats.js';
 import TimvMonthlies from './routes/monthlies/TimvMonthlies.js';
 import DrMonthlies from './routes/monthlies/DrMonthlies.js';
 import HideMonthlies from './routes/monthlies/HideMonthlies.js';
-import GntMonthlies from './routes/monthlies/GntMonthlies.js';
+import GravMonthlies from './routes/monthlies/GravMonthlies.js';
 import SkyMonthlies from './routes/monthlies/SkyMonthlies.js';
 import SpMonthlies from './routes/monthlies/SpMonthlies.js';
 import BpMonthlies from './routes/monthlies/BpMonthlies.js';
@@ -40,13 +40,15 @@ import SkyMonthliesProfile from './routes/monthlies/SkyMonthliesProfile.js';
 import SpMonthliesProfile from './routes/monthlies/SpMonthliesProfile.js';
 import HideMonthliesProfile from './routes/monthlies/HideMonthliesProfile.js';
 import DrMonthliesProfile from './routes/monthlies/DrMonthliesProfile.js';
-import GntMonthliesProfile from './routes/monthlies/GntMonthliesProfile.js';
+import GravMonthliesProfile from './routes/monthlies/GravMonthliesProfile.js';
+import DrawMonthliesProfile from './routes/monthlies/DrawMonthliesProfile.js';
 import BedFarmers from './routes/bedwars/BedFarmers.js';
 import BedRanks from './routes/bedwars/BedRanks.js';
 import BedMaps from './routes/bedwars/BedMaps.js';
 import BedStatsLandingPage from './routes/bedwars/BedStatsLandingPage.js';
 import Ads from './components/Ads.js';
 import About from './routes/About.js';
+import DrawMonthlies from './routes/monthlies/DrawMonthlies.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -87,10 +89,10 @@ function App(props) {
           <Route path="/deathrun/monthlies/:uuid" component={DrMonthliesProfile} />
           <Route path="/deathrun/monthlies" component={DrMonthlies} />
 
-          <Route path="/gnt/monthlies/:uuid" render={() => <GntMonthliesProfile />} />
-          <Route path="/gnt/monthlies" render={() => <GntMonthlies />} />
-          <Route path="/gntm/monthlies/:uuid" render={() => <GntMonthliesProfile mini />} />
-          <Route path="/gntm/monthlies" render={() => <GntMonthlies mini />} />
+          <Route path="/gravity/monthlies/:uuid" component={GravMonthliesProfile} />
+          <Route path="/gravity/monthlies" component={GravMonthlies} />
+          <Route path="/drawit/monthlies/:uuid" component={DrawMonthliesProfile} />
+          <Route path="/drawit/monthlies" component={DrawMonthlies} />
 
           <Route path="/skywars/monthlies/:uuid" component={SkyMonthliesProfile} />
           <Route path="/skywars/monthlies" component={SkyMonthlies} />
@@ -136,19 +138,25 @@ function App(props) {
           <Route path="/monthlies/hide/">
             <Redirect to="/hide/monthlies/" />
           </Route>
-          <Route path="/monthlies/gnt/">
-            <Redirect to="/gnt/monthlies/" />
+          <Route path="/monthlies/gravity/">
+            <Redirect to="/gravity/monthlies/" />
           </Route>
-          <Route path="/monthlies/gntm/">
-            <Redirect to="/gntm/monthlies/" />
+          <Route path="/monthlies/drawit/">
+            <Redirect to="/drawit/monthlies/" />
           </Route>
 
           {/* Aliases */}
-          <Route exact path="/dr*">
-            <Redirect to="/deathrun" />
+          <Route exact path="/dr/*">
+            <Redirect to="/deathrun/monthlies" />
           </Route>
-          <Route exact path="/sky/*">
-            <Redirect to="/skywars" />
+          <Route exact path="/sp/*">
+            <Redirect to="/splegg/monthlies" />
+          </Route>
+          <Route exact path="/grav/*">
+            <Redirect to="/gravity/monthlies" />
+          </Route>
+          <Route exact path="/draw/*">
+            <Redirect to="/drawit/monthlies" />
           </Route>
 
           <Router />

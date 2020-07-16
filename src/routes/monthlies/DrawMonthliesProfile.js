@@ -21,21 +21,18 @@ const stats = {
     points: "Points",
     victories: "Victories",
     played: "Games Played",
-    kills: "Kills",
-    deaths: "Deaths",
-    kd: {
-        name: "K/D",
-        value: (data) => (data.kills / data.deaths).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    },
+    correct: "Correct Guesses",
+    incorrect: "Incorrect Guesses",
+    skips: "Skips",
     wl: {
         name: "W/L",
         value: (data) => (data.victories / (data.played - data.victories)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     }
 }
 
-function GntMonthliesProfile(props) {
-    return (<GameProfile stats={stats} fbConfig={props.mini ? Monthlies.gntm : Monthlies.gnt} path="monthly/"
-        name={props.mini ? "gntm" : "gnt"} />);
+function GravMonthliesProfile(props) {
+    return (<GameProfile stats={stats} fbConfig={Monthlies.draw} path="monthly/"
+        name={"drawit"} />);
 }
 
-export default GntMonthliesProfile;
+export default GravMonthliesProfile;

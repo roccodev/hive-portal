@@ -22,31 +22,29 @@ const columns = [
     { title: "Place", field: "place", defaultSort: "asc" },
     { title: "Name", field: "name", searchable: true },
     { title: "Points", field: "points" },
-    { title: "Kills", field: "kills" },
-    { title: "Deaths", field: "deaths" },
     { title: "Victories", field: "victories" },
     { title: "Games Played", field: "played" },
-    { title: "K/D", field: "kd" },
+    { title: "Correct Guesses", field: "correct" },
+    { title: "Incorrect Guesses", field: "incorrect" },
+    { title: "Skips", field: "skips" },
     { title: "W/L", field: "wl" }
 ];
 
-class DeathrunMonthlies extends React.Component {
+class DrawitMonthlies extends React.Component {
 
     render() {
         const fields = {
             name: "username",
-            kills: "kills",
             victories: "victories",
             played: "played",
-            deaths: "deaths"
         }
         return (
             <div>
                 {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json),
-                    this.props.mini ? Monthlies.gntm : Monthlies.gnt, this.props.theme, "/monthly", null, `${this.props.mini ? "gntm" : "gnt"}/monthlies`)}
+                    Monthlies.draw, this.props.theme, "/monthly", null, `drawit/monthlies`)}
             </div>
         );
     }
 }
 
-export default withTheme(DeathrunMonthlies);
+export default withTheme(DrawitMonthlies);

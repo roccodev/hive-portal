@@ -33,11 +33,11 @@ function getComponentForMode(mode) {
         case "hide":
             ModeState.index = modes.indexOf("Hide and Seek");
             break;
-        case "gnt":
-            ModeState.index = modes.indexOf("SkyGiants");
+        case "gravity":
+            ModeState.index = modes.indexOf("Gravity");
             break;
-        case "gntm":
-            ModeState.index = modes.indexOf("SkyGiants: Mini");
+        case "drawit":
+            ModeState.index = modes.indexOf("DrawIt");
             break;
         case "skywars":
             ModeState.index = modes.indexOf("SkyWars");

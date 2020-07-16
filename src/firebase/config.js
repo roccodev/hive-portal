@@ -82,7 +82,7 @@ const Monthlies = {
         storageBucket: "monthlies-sky.appspot.com",
         messagingSenderId: "504582030190"
     },
-    gnt: {
+    grav: {
         apiKey: "AIzaSyCGzwz3wTymTTJgX8M3K9qwMwdre318ht0",
         authDomain: "monthlies-gnt.firebaseapp.com",
         databaseURL: "https://monthlies-gnt.firebaseio.com",
@@ -90,7 +90,7 @@ const Monthlies = {
         storageBucket: "monthlies-gnt.appspot.com",
         messagingSenderId: "291122477484"
     },
-    gntm: {
+    draw: {
         apiKey: "AIzaSyAIkBWw9JSrl1e7ipeVRwrrKDjfZp_zSQ8",
         authDomain: "monthlies-gntm.firebaseapp.com",
         databaseURL: "https://monthlies-gntm.firebaseio.com",
