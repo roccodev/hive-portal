@@ -141,8 +141,10 @@ function makeTableParser(query, fields, json) {
             obj = { name: obj[fields.name], ...obj };
             if (fields.name !== "name")
                 delete obj[fields.name];
-            obj.kd = (obj[fields.kills] / obj[fields.deaths]).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            obj.wl = (obj[fields.victories] / (obj[fields.played] - obj[fields.victories])).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            obj.kd = (obj[fields.kills] / obj[fields.deaths]);
+            if (isNaN(obj.kd)) obj.kd = 0;
+            obj.wl = (obj[fields.victories] / (obj[fields.played] - obj[fields.victories]));
+            if (isNaN(obj.wl)) obj.wl = 0;
             return obj;
         })
         const pageSize = query.pageSize;
@@ -158,7 +160,7 @@ function makeTableParser(query, fields, json) {
                 const obj1 = a[orderBy.field];
                 const obj2 = b[orderBy.field];
 
-                const cmp = obj1 > obj2 ? 1 : obj1 < obj2 ? -1 : 0;
+                const cmp = obj1 - obj2;
                 return query.orderDirection === "asc" ? cmp : -cmp;
             })
         }

@@ -16,7 +16,7 @@
 import React from 'react';
 import { withTheme } from '@material-ui/core';
 import { makeTable, makeTableParser } from '../../components/row/GameTable';
-import { Monthlies } from '../../firebase/config';
+import { Monthlies, Render } from '../../firebase/config';
 
 const columns = [
     { title: "Place", field: "place", defaultSort: "asc" },
@@ -27,8 +27,8 @@ const columns = [
     { title: "Victories", field: "victories" },
     { title: "Games Played", field: "played" },
     { title: "Most Points", field: "most_change" },
-    { title: "K/D", field: "kd" },
-    { title: "W/L", field: "wl" }
+    { title: "K/D", field: "kd", render: Render.decimal("kd") },
+    { title: "W/L", field: "wl", render: Render.decimal("wl") }
 ];
 
 class DeathrunMonthlies extends React.Component {

@@ -16,7 +16,7 @@
 import React from 'react';
 import { withTheme } from '@material-ui/core';
 import { makeTable, makeTableParser } from '../../components/row/GameTable';
-import config from '../../firebase/config';
+import config, { Render } from '../../firebase/config';
 
 const columns = [
     { title: "Place", field: "_____place", defaultSort: "asc" },
@@ -28,8 +28,8 @@ const columns = [
     { title: "Played", field: "played" },
     { title: "Beds Destroyed", field: "zBeds" },
     { title: "Teams Eliminated", field: "zTeams" },
-    { title: "K/D", field: "kd" },
-    { title: "W/L", field: "wl" }
+    { title: "K/D", field: "kd", render: Render.decimal("kd") },
+    { title: "W/L", field: "wl", render: Render.decimal("wl") }
 ];
 
 class Bedwars extends React.Component {

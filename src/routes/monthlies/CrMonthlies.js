@@ -22,28 +22,27 @@ const columns = [
     { title: "Place", field: "place", defaultSort: "asc" },
     { title: "Name", field: "name", searchable: true },
     { title: "Points", field: "points" },
-    { title: "Seeker Kills", field: "seeker_kills" },
-    { title: "Hider Kills", field: "hider_kills" },
-    { title: "Deaths", field: "deaths" },
     { title: "Victories", field: "victories" },
-    { title: "Seeker K/D", field: "kd", render: Render.decimal("kd") },
+    { title: "Kills", field: "kills" },
+    { title: "Deaths", field: "deaths" },
+    { title: "K/D", field: "kd", render: Render.decimal("kd") }
 ];
 
-class DeathrunMonthlies extends React.Component {
+class CrankedMonthlies extends React.Component {
 
     render() {
         const fields = {
             name: "username",
-            kills: "seeker_kills",
-            deaths: "deaths"
+            kills: "kills",
+            deaths: "deaths",
         }
         return (
             <div>
                 {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json),
-                    Monthlies.hide, this.props.theme, "/monthly", null, "hide/monthlies")}
+                    Monthlies.cr, this.props.theme, "/monthly", null, `cr/monthlies`)}
             </div>
         );
     }
 }
 
-export default withTheme(DeathrunMonthlies);
+export default withTheme(CrankedMonthlies);

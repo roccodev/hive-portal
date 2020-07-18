@@ -49,6 +49,10 @@ import BedStatsLandingPage from './routes/bedwars/BedStatsLandingPage.js';
 import Ads from './components/Ads.js';
 import About from './routes/About.js';
 import DrawMonthlies from './routes/monthlies/DrawMonthlies.js';
+import CrMonthliesProfile from './routes/monthlies/CrMonthliesProfile.js';
+import CrMonthlies from './routes/monthlies/CrMonthlies.js';
+import BdMonthliesProfile from './routes/monthlies/BdMonthliesProfile.js';
+import BdMonthlies from './routes/monthlies/BdMonthlies.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -105,6 +109,12 @@ function App(props) {
 
           <Route path="/hide/monthlies/:uuid" component={HideMonthliesProfile} />
           <Route path="/hide/monthlies" component={HideMonthlies} />
+
+          <Route path="/cr/monthlies/:uuid" component={CrMonthliesProfile} />
+          <Route path="/cr/monthlies" component={CrMonthlies} />
+
+          <Route path="/bd/monthlies/:uuid" component={BdMonthliesProfile} />
+          <Route path="/bd/monthlies" component={BdMonthlies} />
         </Switch>
       </Container>
       <Ads />

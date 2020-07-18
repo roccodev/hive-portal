@@ -16,7 +16,7 @@
 import React from 'react';
 import { withTheme } from '@material-ui/core';
 import { makeTable, makeTableParser } from '../../components/row/GameTable';
-import { Monthlies } from '../../firebase/config';
+import { Monthlies, Render } from '../../firebase/config';
 
 const columns = [
     { title: "Place", field: "place", defaultSort: "asc" },
@@ -24,7 +24,7 @@ const columns = [
     { title: "Points", field: "points" },
     { title: "Victories", field: "victories" },
     { title: "Games Played", field: "played" },
-    { title: "W/L", field: "wl" }
+    { title: "W/L", field: "wl", render: Render.decimal("wl") }
 ];
 
 class GravityMonthlies extends React.Component {

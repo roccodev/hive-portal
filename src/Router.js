@@ -48,6 +48,12 @@ function getComponentForMode(mode) {
         case "bp":
             ModeState.index = modes.indexOf("BlockParty");
             break;
+        case "cr":
+            ModeState.index = modes.indexOf("Cranked");
+            break;
+        case "bd":
+            ModeState.index = modes.indexOf("BatteryDash");
+            break;
         default:
             break;
     }

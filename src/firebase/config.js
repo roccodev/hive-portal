@@ -105,8 +105,30 @@ const Monthlies = {
         projectId: "monthlies-hide",
         storageBucket: "monthlies-hide.appspot.com",
         messagingSenderId: "359477554692"
+    },
+    bd: {
+        apiKey: "AIzaSyDS-EKTy9qE5F-BaP3PnHLBM_Z-aodCwps",
+        authDomain: "monthlies-bd.firebaseapp.com",
+        databaseURL: "https://monthlies-bd.firebaseio.com",
+        projectId: "monthlies-bd",
+        storageBucket: "monthlies-bd.appspot.com",
+        messagingSenderId: "638303546602",
+        appId: "1:638303546602:web:793e7c134ca60af1a5bb93"
+    },
+    cr: {
+        apiKey: "AIzaSyC3NKggyoGwB-jqNbRF9fslHnWbUpytn58",
+        authDomain: "monthlies-cr.firebaseapp.com",
+        databaseURL: "https://monthlies-cr.firebaseio.com",
+        projectId: "monthlies-cr",
+        storageBucket: "monthlies-cr.appspot.com",
+        messagingSenderId: "150908219682",
+        appId: "1:150908219682:web:407d243efbea95b657357b"
     }
 }
 
+const Render = {
+    decimal: (field) => row => row[field].toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
 export default Bedwars;
-export { Monthlies };
+export { Monthlies, Render };

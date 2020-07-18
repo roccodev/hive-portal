@@ -87,6 +87,18 @@ const modes = {
             name: "Monthlies",
             url: "/drawit/monthlies"
         }
+    ],
+    "Cranked": [
+        {
+            name: "Monthlies",
+            url: "/cr/monthlies"
+        }
+    ],
+    "BatteryDash": [
+        {
+            name: "Monthlies",
+            url: "/bd/monthlies"
+        }
     ]
 }
 
