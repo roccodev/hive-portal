@@ -123,6 +123,14 @@ const Monthlies = {
         storageBucket: "monthlies-cr.appspot.com",
         messagingSenderId: "150908219682",
         appId: "1:150908219682:web:407d243efbea95b657357b"
+    },
+    sg: {
+        apiKey: "AIzaSyBr6cKVoLvOmhm9zabvOzxx2zo9gQSK_Po",
+        authDomain: "monthlies-sgn.firebaseapp.com",
+        databaseURL: "https://monthlies-sgn-default-rtdb.firebaseio.com",
+        projectId: "monthlies-sgn",
+        storageBucket: "monthlies-sgn.appspot.com",
+        messagingSenderId: "358365710408"
     }
 }
 

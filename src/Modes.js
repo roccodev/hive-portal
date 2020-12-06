@@ -99,6 +99,12 @@ const modes = {
             name: "Monthlies",
             url: "/bd/monthlies"
         }
+    ],
+    "Survival Games": [
+        {
+            name: "Monthlies",
+            url: "/sg/monthlies"
+        }
     ]
 }
 

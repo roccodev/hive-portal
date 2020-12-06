@@ -54,6 +54,9 @@ function getComponentForMode(mode) {
         case "bd":
             ModeState.index = modes.indexOf("BatteryDash");
             break;
+        case "sg":
+            ModeState.index = modes.indexOf("Survival Games");
+            break;
         default:
             break;
     }

@@ -21,17 +21,18 @@ import { Monthlies, Render } from '../../firebase/config';
 const columns = [
     { title: "Place", field: "place", defaultSort: "asc" },
     { title: "Name", field: "name", searchable: true },
-    { title: "Points", field: "points" },
+    { title: "Victories", field: "victories" },
     { title: "Kills", field: "kills" },
     { title: "Deaths", field: "deaths" },
-    { title: "Victories", field: "victories" },
     { title: "Games Played", field: "played" },
-    { title: "Most Points", field: "most_change" },
+    { title: "Points", field: "points" },
+    { title: "Deathmatches", field: "deathmatches" },
+    { title: "Crates Opened", field: "crates" },
     { title: "K/D", field: "kd", render: Render.decimal("kd") },
     { title: "W/L", field: "wl", render: Render.decimal("wl") }
 ];
 
-class SkyMonthlies extends React.Component {
+class SgMonthlies extends React.Component {
 
     render() {
         const fields = {
@@ -44,10 +45,10 @@ class SkyMonthlies extends React.Component {
         return (
             <div>
                 {makeTable(columns, "Monthly Leaderboard", (query, json) => makeTableParser(query, fields, json),
-                    Monthlies.sky, this.props.theme, "/monthly", null, "skywars/monthlies")}
+                    Monthlies.sg, this.props.theme, "/monthly", null, "sg/monthlies")}
             </div>
         );
     }
 }
 
-export default withTheme(SkyMonthlies);
+export default withTheme(SgMonthlies);

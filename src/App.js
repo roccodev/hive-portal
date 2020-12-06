@@ -32,6 +32,7 @@ import GravMonthlies from './routes/monthlies/GravMonthlies.js';
 import SkyMonthlies from './routes/monthlies/SkyMonthlies.js';
 import SpMonthlies from './routes/monthlies/SpMonthlies.js';
 import BpMonthlies from './routes/monthlies/BpMonthlies.js';
+import SgMonthlies from './routes/monthlies/SgMonthlies.js';
 import BedWinstreaks from './routes/bedwars/BedWinstreaks.js';
 import BedMonthliesProfile from './routes/bedwars/BedMonthliesProfile.js';
 import BpMonthliesProfile from './routes/monthlies/BpMonthliesProfile.js';
@@ -53,6 +54,7 @@ import CrMonthliesProfile from './routes/monthlies/CrMonthliesProfile.js';
 import CrMonthlies from './routes/monthlies/CrMonthlies.js';
 import BdMonthliesProfile from './routes/monthlies/BdMonthliesProfile.js';
 import BdMonthlies from './routes/monthlies/BdMonthlies.js';
+import SgMonthliesProfile from './routes/monthlies/SgMonthliesProfile.js';
 
 function App(props) {
   const [cookieTheme, _] = useCookies('palette-type');
@@ -115,6 +117,9 @@ function App(props) {
 
           <Route path="/bd/monthlies/:uuid" component={BdMonthliesProfile} />
           <Route path="/bd/monthlies" component={BdMonthlies} />
+
+          <Route path="/sg/monthlies/:uuid" component={SgMonthliesProfile} />
+          <Route path="/sg/monthlies" component={SgMonthlies} />
         </Switch>
       </Container>
       <Ads />
